@@ -1,4 +1,4 @@
-class PatientsController < ActionController::Base
+class AppointmentsController < ActionController::Base
    def index
    end
 
@@ -9,9 +9,7 @@ class PatientsController < ActionController::Base
    end
 
    def create    
-    Patients.create {
-        
-    }
+    
    end
 
    def login

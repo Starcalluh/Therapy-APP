@@ -1,0 +1,9 @@
+<h1><%=@doctor.name%></h1>
+
+<h2>Appointments:</h2>
+<ul>
+<% @appointments.each | app | do %>
+    <li><%=app.date%> - <%=app.time%></li>
+<%end%>
+</ul>
+
