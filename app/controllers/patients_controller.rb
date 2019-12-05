@@ -24,9 +24,8 @@ class PatientsController < ActionController::Base
   def sign_in
     redirect_to "/patientform"
   end
-    def sign_up
-      redirect_to "/patientform"
-    end
+
+
   def create 
     @patient = Patient.new(patient_params)
     if @patient.valid?
@@ -34,7 +33,7 @@ class PatientsController < ActionController::Base
         redirect_to "/patientform"
     else 
       flash[:errors] = @patient.errors.messages
-      redirect_to new_patient_path
+      redirect_to "/signup"
     end
   end
     
@@ -59,6 +58,6 @@ class PatientsController < ActionController::Base
     end
   
   def patient_params
-    params.require(:patient).permit(:firstname, :lastname, :phone_number, :email, :password, :password_confirmation, )
-end
+    params.permit(:first_name, :last_name, :phone_number, :email, :password, :password_confirmation, )
+  end
 end
