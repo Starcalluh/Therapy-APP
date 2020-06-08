@@ -9,6 +9,7 @@ class PatientsController < ActionController::Base
   end
       
   def patientform
+    @patient = current_patient
   end
 
 
@@ -30,6 +31,7 @@ class PatientsController < ActionController::Base
     @patient = Patient.new(patient_params)
     if @patient.valid?
         @patient.save 
+        session[:patient_id] = @patient.id
         redirect_to "/patientform"
     else 
       flash[:errors] = @patient.errors.messages
@@ -42,8 +44,21 @@ class PatientsController < ActionController::Base
       end
     
       def update
-        @patient.update(patients_params)
-        redirect_to @patient
+        @patient = current_patient
+        puts params
+        @patient.update(you_have_been_to_therapy_before: params[:you_have_been_to_therapy_before],
+        you_are_currently_on_medication: params[:you_are_currently_on_medication],
+        you_have_experienced_suicidal_thoughts: params[:you_have_experienced_suicidal_thoughts],
+        you_have_a_known_mental_illness: params[:you_have_a_known_mental_illness],
+        you_are_you_committed_to_treatment: params[:you_are_you_committed_to_treatment],
+        you_have_any_medical_problems: params[:you_have_any_medical_problems],
+        you_experience_hallucinations: params[:you_experience_hallucinations],
+        are_you_sexually_active: params[:are_you_sexually_active],
+        you_have_pets: params[:you_have_pets],
+        you_have_been_convicted_of_a_crime: params[:you_have_been_convicted_of_a_crime],
+        you_are_in_a_relationship: params[:you_are_in_a_relationship],
+        you_speak_english_fluently: params[:you_speak_english_fluently])
+        redirect_to "/patients/#{@patient.id}"
       end
     
       def destroy
